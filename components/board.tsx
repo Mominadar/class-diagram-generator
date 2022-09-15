@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import ReactFlow, {
   addEdge,
   applyEdgeChanges,
@@ -16,14 +16,13 @@ import ClassNode from "./ClassNode";
 const nodeTypes: NodeTypes = { classNode: ClassNode };
 
 interface BoardProps {
-  initialNodes: Node[];
-  initialEdges: Edge[];
+  nodes: Node[];
+  edges: Edge[];
+  setNodes: (nodes: Node[]) => void;
+  setEdges: (edges: Node[]) => void;
 }
 
-function Board({ initialNodes, initialEdges }: BoardProps) {
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
-
+function Board({ nodes, edges, setNodes, setEdges }: BoardProps) {
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>
       setNodes((nds) => applyNodeChanges(changes, nds)),

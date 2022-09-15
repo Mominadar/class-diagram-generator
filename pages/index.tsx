@@ -1,4 +1,5 @@
 import domtoimage from "dom-to-image";
+import { useState } from "react";
 import Board from "../components/Board";
 import { initialEdges, initialNodes } from "../components/initialElements";
 import Navbar from "../components/Navbar";
@@ -7,17 +8,24 @@ import { trpc } from "../utils/trpc";
 
 export default function IndexPage() {
   const hello = trpc.useQuery(["hello", { text: "client" }]);
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState(initialEdges);
 
-  const handleAddClass = () => {};
-  const handleAddAttribute = () => {
+  const handleAddClass = () => {
     const newNode = {
-      id: "node-1",
+      id: `class-node-${nodes.length}`,
       type: "classNode",
       position: { x: 0, y: 0 },
       data: { value: 123 },
     };
-    
+    setNodes([newNode, ...nodes]);
   };
+  const handleAddAttribute = (data: any) => {
+    console.log("data,", data);
+    console.log("attt", attributes);
+    const newAttr = { id: `${className}-attr-${attributes.length}`, ...data };
+  };
+
   const handleSave = () => {};
   const handleDownload = () => {
     console.log("savinggg");
@@ -40,7 +48,7 @@ export default function IndexPage() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-dark">
       <Navbar />
-      <div className="grid grid-cols-4  bg-gray-dark min-h-full flex-1">
+      <div className="grid grid-cols-5  bg-gray-dark min-h-full flex-1">
         <div className="col-span-1">
           <SideBar
             handleAddClass={handleAddClass}
@@ -49,8 +57,13 @@ export default function IndexPage() {
             handleSave={handleSave}
           />
         </div>
-        <div className="col-span-3">
-          <Board initialNodes={initialNodes} initialEdges={initialEdges} />
+        <div className="col-span-4">
+          <Board
+            nodes={nodes}
+            edges={edges}
+            setNodes={setNodes}
+            setEdges={setEdges}
+          />
         </div>
       </div>
       <footer className="flex-grow-1 text-center text-gray-light py-3">
