@@ -52,7 +52,7 @@ function ClassNode({ classElement }: ClassNodeProps) {
         >
           <BiPlus
             fontSize={12}
-            className="text-green-600 bg-green-100 rounded-[10px]"
+            className="text-slate-600 bg-slate-200 rounded-[10px]"
           />
         </button>
       </div>
@@ -71,9 +71,9 @@ function ClassNode({ classElement }: ClassNodeProps) {
           );
         })}
       </div>
-      {/* <div className="flex flex-col h-full" id="attributes-list">
+      <div className="flex flex-col h-full" id="attributes-list">
         <InputField addAttribute={onAddAttribute} />
-      </div> */}
+      </div>
       <Handle
         type="source"
         position={Position.Bottom}

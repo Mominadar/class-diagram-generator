@@ -67,7 +67,8 @@ export default function IndexPage() {
         </div>
       </div>
       <footer className="flex-grow-1 text-center text-gray-light py-3">
-        Created by Momina Babar
+        Class Diagram Generator &copy; {new Date().getFullYear()} Created by
+        Momina Babar
       </footer>
     </div>
   );

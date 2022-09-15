@@ -67,17 +67,17 @@ function InputField({ values, addAttribute }: InputFieldProps) {
           <>
             <MdModeEdit
               fontSize={12}
-              className="text-sky-400 bg-sky-600 rounded-[10px] p-[2px]"
+              className="text-slate-600 p-[2px] rounded-[10px] bg-slate-200"
             />
             <MdDelete
               fontSize={12}
-              className="text-rose-400 bg-rose-600 rounded-[10px] p-[1px] mx-[2px]"
+              className="text-slate-600 p-[1px] rounded-[10px] bg-slate-200 m-[2px]"
             />
           </>
         ) : (
           <TiTick
             fontSize={12}
-            className="text-green-600 bg-green-100 rounded-[10px]"
+            className="text-slate-600 p-[1px] rounded-[10px] bg-slate-200"
           />
         )}
       </button>

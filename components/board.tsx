@@ -6,6 +6,7 @@ import ReactFlow, {
   Background,
   BackgroundVariant,
   Connection,
+  Controls,
   Edge,
   EdgeChange,
   NodeChange,
@@ -51,6 +52,7 @@ function Board({ nodes, edges, setNodes, setEdges }: BoardProps) {
       fitView
     >
       <Background variant={BackgroundVariant.Dots} gap={12} />
+      <Controls className="right-[15px] left-0" />
     </ReactFlow>
   );
 }
