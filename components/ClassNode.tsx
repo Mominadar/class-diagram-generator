@@ -11,39 +11,23 @@ interface ClassNodeProps {
 
 function ClassNode({ classElement }: ClassNodeProps) {
   const [attributes, setAttributes] = useState(classElement?.attributes ?? []);
-
+  const [className, setClassName] = useState(classElement?.className ?? "");
   const onChange = useCallback((evt: any) => {
     console.log(evt?.target.value);
   }, []);
 
   const onAddAttribute = (data: any) => {
-    // const app = document.getElementById('attributes-list');
-
-    //   // Create a new H1 element
-    //   const header = document.createElement('h1');
-
-    //   // Create a new text node for the H1 element
-    //   const headerContent = document.createTextNode(
-    //     'Develop. Preview. Ship. 🚀',
-    //   );
-
-    //   // Append the text to the H1 element
-    //   header.appendChild(headerContent);
-
-    //   // Place the H1 element inside the div
-    //   app?.appendChild(header);
     console.log("data,", data);
-    setAttributes([...attributes, data]);
+    console.log("attt", attributes);
+    const newAttr = { id: `${className}-attr-${attributes.length}`, ...data };
+    setAttributes([newAttr, ...attributes]);
   };
-
-  console.log("dddd", attributes);
-
   const onEditAttribute = () => {};
 
   const onDeleteAttribute = () => {};
 
   return (
-    <div className="text-updater-node h-full">
+    <div className="text-updater-node h-full p-20">
       <Handle type="target" position={Position.Top} />
       <div className="flex flex-col">
         <input
@@ -56,13 +40,12 @@ function ClassNode({ classElement }: ClassNodeProps) {
       <div className="flex flex-col h-full">
         {attributes.map((attribute) => {
           return (
-            <InputField key={attribute.name} addAttribute={onAddAttribute} />
+            <InputField key={attribute.id} addAttribute={onAddAttribute} />
           );
         })}
       </div>
       <div className="flex flex-col h-full" id="attributes-list">
         <InputField addAttribute={onAddAttribute} />
-        <button onClick={onAddAttribute}>add attribute</button>
       </div>
       <Handle
         type="source"

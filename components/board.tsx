@@ -1,15 +1,47 @@
+import { useCallback, useState } from "react";
 import ReactFlow, {
+  addEdge,
+  applyEdgeChanges,
+  applyNodeChanges,
   Background,
   BackgroundVariant,
+  Connection,
+  Edge,
+  EdgeChange,
+  NodeChange,
   NodeTypes,
 } from "react-flow-renderer";
 import ClassNode from "./ClassNode";
 
 const nodeTypes: NodeTypes = { classNode: ClassNode };
 
-function Flow({ nodes, edges, onNodesChange, onEdgesChange, onConnect }: any) {
+interface BoardProps {
+  initialNodes: Node[];
+  initialEdges: Edge[];
+}
+
+function Board({ initialNodes, initialEdges }: BoardProps) {
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState(initialEdges);
+
+  const onNodesChange = useCallback(
+    (changes: NodeChange[]) =>
+      setNodes((nds) => applyNodeChanges(changes, nds)),
+    [setNodes]
+  );
+  const onEdgesChange = useCallback(
+    (changes: EdgeChange[]) =>
+      setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [setEdges]
+  );
+  const onConnect = useCallback(
+    (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
+    [setEdges]
+  );
+
   return (
     <ReactFlow
+      id="board"
       className="flex flex-auto bg-gray-light"
       nodes={nodes}
       edges={edges}
@@ -24,4 +56,4 @@ function Flow({ nodes, edges, onNodesChange, onEdgesChange, onConnect }: any) {
   );
 }
 
-export default Flow;
+export default Board;

@@ -1,66 +1,38 @@
-import { useCallback, useState } from "react";
-import {
-  addEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
-} from "react-flow-renderer";
-import Board from "../components/board";
+import domtoimage from "dom-to-image";
+import Board from "../components/Board";
+import { initialEdges, initialNodes } from "../components/initialElements";
 import Navbar from "../components/Navbar";
 import SideBar from "../components/SideBar";
-
 import { trpc } from "../utils/trpc";
 
-const initialNodes = [
-  {
-    id: "node-1",
-    type: "classNode",
-    position: { x: 0, y: 0 },
-    data: { value: 123 },
-  },
-  {
-    id: "node-2",
-    type: "classNode",
-    targetPosition: "top",
-    position: { x: 0, y: 200 },
-    data: { value: 123 },
-  },
-  {
-    id: "node-3",
-    type: "classNode",
-    targetPosition: "top",
-    position: { x: 200, y: 200 },
-    data: { value: 123 },
-  },
-];
-
-const initialEdges = [
-  { id: "edge-1", source: "node-1", target: "node-2", sourceHandle: "a" },
-  { id: "edge-2", source: "node-1", target: "node-3", sourceHandle: "b" },
-];
-
 export default function IndexPage() {
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
-
-  const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [setNodes]
-  );
-  const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [setEdges]
-  );
-  const onConnect = useCallback(
-    (connection) => setEdges((eds) => addEdge(connection, eds)),
-    [setEdges]
-  );
-
   const hello = trpc.useQuery(["hello", { text: "client" }]);
 
   const handleAddClass = () => {};
-  const handleAddAttribute = () => {};
+  const handleAddAttribute = () => {
+    const newNode = {
+      id: "node-1",
+      type: "classNode",
+      position: { x: 0, y: 0 },
+      data: { value: 123 },
+    };
+    
+  };
   const handleSave = () => {};
-  const handleDownload = () => {};
+  const handleDownload = () => {
+    console.log("savinggg");
+    const node = document.getElementById("board")!;
+    domtoimage
+      .toPng(node)
+      .then(function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        document.body.appendChild(img);
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
+  };
 
   if (!hello.data) {
     return <div>Loading...</div>;
@@ -78,7 +50,7 @@ export default function IndexPage() {
           />
         </div>
         <div className="col-span-3">
-          <Board nodes={nodes} edges={edges} />
+          <Board initialNodes={initialNodes} initialEdges={initialEdges} />
         </div>
       </div>
       <footer className="flex-grow-1 text-center text-gray-light py-3">
