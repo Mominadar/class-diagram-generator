@@ -37,7 +37,7 @@ function ClassNode({ classElement }: ClassNodeProps) {
   return (
     <div className="h-full p-[10px] border-[1px] border-solid border-[#eee] border-radius-[500px] bg-white rounded-[5px]">
       <Handle type="target" position={Position.Top} />
-      <div className="flex justify-between">
+      <div className="flex justify-between  mb-[5px]">
         <input
           className="text-[10px] text-slate-400 capitalize"
           id="text"
@@ -48,12 +48,13 @@ function ClassNode({ classElement }: ClassNodeProps) {
         <button
           type="submit"
           onClick={onAddAttribute}
-          className="text-[7px] text-center flex items-center justify-center col-span-1"
+          className="text-[7px] text-center flex items-center justify-center col-span-1 bg-slate-200 p-[2px] text-slate-600 rounded-[1px]"
         >
           <BiPlus
             fontSize={12}
             className="text-slate-600 bg-slate-200 rounded-[10px]"
-          />
+          />{" "}
+          Add Attribute
         </button>
       </div>
       <div className="grid grid-cols-7">
@@ -78,9 +79,10 @@ function ClassNode({ classElement }: ClassNodeProps) {
         type="source"
         position={Position.Bottom}
         id="a"
-        style={handleStyle}
+        // style={handleStyle}
       />
-      <Handle type="source" position={Position.Bottom} id="b" />
+      <Handle type="source" position={Position.Left} id="b" />
+      <Handle type="source" position={Position.Right} id="b" />
     </div>
   );
 }

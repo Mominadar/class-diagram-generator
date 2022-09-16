@@ -52,7 +52,7 @@ function Board({ nodes, edges, setNodes, setEdges }: BoardProps) {
       fitView
     >
       <Background variant={BackgroundVariant.Dots} gap={12} />
-      <Controls className="right-[15px] left-0" />
+      <Controls className="right-[15px] !left-auto w-fit bg-red" />
     </ReactFlow>
   );
 }

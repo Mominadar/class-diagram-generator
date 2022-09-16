@@ -22,7 +22,6 @@ function InputField({ values, addAttribute }: InputFieldProps) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data: any) => {
