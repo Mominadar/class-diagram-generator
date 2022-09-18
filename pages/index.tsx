@@ -1,25 +1,31 @@
 import domtoimage from "dom-to-image";
 import { useState } from "react";
-import Board from "../components/Board";
-import { initialEdges, initialNodes } from "../components/initialElements";
-import Navbar from "../components/Navbar";
-import SideBar from "../components/SideBar";
-import { trpc } from "../utils/trpc";
+import Board from "../src/components/Board";
+import { initialEdges, initialNodes } from "../src/components/initialElements";
+import Navbar from "../src/components/Navbar";
+import SideBar from "../src/components/SideBar";
+import getLayoutedElements from "../src/utils/setLayout";
+import { trpc } from "../src/utils/trpc";
+
+const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+  initialNodes,
+  initialEdges
+);
 
 export default function IndexPage() {
   const hello = trpc.useQuery(["hello", { text: "client" }]);
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
+  const [nodes, setNodes] = useState(layoutedNodes);
+  const [edges, setEdges] = useState(layoutedEdges);
 
   const handleAddClass = () => {
     const newNode = {
       id: `class-node-${nodes.length}`,
       type: "classNode",
-      position: { x: 0, y: 0 },
-      data: { value: 123 },
+      position: { x: 0, y: 100 },
     };
     setNodes([newNode, ...nodes]);
   };
+  
   const handleAddAttribute = (data: any) => {
     console.log("data,", data);
     console.log("attt", attributes);

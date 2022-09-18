@@ -16,7 +16,7 @@ export default function SideBar({
   handleDownload,
 }: SideBarProps) {
   return (
-    <div className="bg-gray flex flex-col flex-grow-1 flex-auto justify-start gap-5 py-20 min-h-full relative">
+    <div className="bg-gradient flex flex-col flex-grow-1 flex-auto justify-start gap-5 py-20 min-h-full relative">
       <SideBarButton color="red" onClick={handleAddClass}>
         <VscSymbolClass fontSize={22} />
         Add Class

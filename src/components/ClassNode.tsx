@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 import { Handle, Position } from "react-flow-renderer";
 import { BiPlus } from "react-icons/bi";
+import { ClassElement } from "../types";
 import InputField from "./InputField";
-import { ClassElement } from "./types";
 
 const handleStyle = { left: 10 };
 
@@ -18,16 +18,20 @@ function ClassNode({ classElement }: ClassNodeProps) {
   }, []);
 
   const onAddAttribute = (data: any) => {
-    console.log("data,", data);
-    console.log("attt", attributes);
-    const newAttr = { id: `${className}-attr-${attributes.length}`, ...data };
-    setAttributes([newAttr, ...attributes]);
+    const newAttr = {
+      id: `${className}-attr-${attributes.length}`,
+      name: "",
+      type: "",
+      dataType: "",
+      keyType: "",
+    };
+    setAttributes([...attributes, newAttr]);
   };
   const onSaveAttribute = (data: any) => {
     console.log("data,", data);
     console.log("attt", attributes);
-    const newAttr = { id: `${className}-attr-${attributes.length}`, ...data };
-    setAttributes([newAttr, ...attributes]);
+    // const newAttr = { id: `${className}-attr-${attributes.length}`, ...data };
+    // setAttributes([newAttr, ...attributes]);
   };
 
   const onEditAttribute = () => {};
@@ -36,7 +40,6 @@ function ClassNode({ classElement }: ClassNodeProps) {
 
   return (
     <div className="h-full p-[10px] border-[1px] border-solid border-[#eee] border-radius-[500px] bg-white rounded-[5px]">
-      <Handle type="target" position={Position.Top} />
       <div className="flex justify-between  mb-[5px]">
         <input
           className="text-[10px] text-slate-400 capitalize"
@@ -53,7 +56,7 @@ function ClassNode({ classElement }: ClassNodeProps) {
           <BiPlus
             fontSize={12}
             className="text-slate-600 bg-slate-200 rounded-[10px]"
-          />{" "}
+          />
           Add Attribute
         </button>
       </div>
@@ -68,21 +71,21 @@ function ClassNode({ classElement }: ClassNodeProps) {
       <div className="flex flex-col h-full">
         {attributes.map((attribute) => {
           return (
-            <InputField key={attribute.id} addAttribute={onAddAttribute} />
+            <InputField
+              key={attribute.id}
+              addAttribute={onSaveAttribute}
+              values={attribute}
+            />
           );
         })}
       </div>
       <div className="flex flex-col h-full" id="attributes-list">
-        <InputField addAttribute={onAddAttribute} />
+        <InputField addAttribute={onSaveAttribute} />
       </div>
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        id="a"
-        // style={handleStyle}
-      />
+      <Handle type="source" position={Position.Bottom} id="a" />
       <Handle type="source" position={Position.Left} id="b" />
-      <Handle type="source" position={Position.Right} id="b" />
+      <Handle type="source" position={Position.Right} id="c" />
+      <Handle type="source" position={Position.Top} id="d" />
     </div>
   );
 }

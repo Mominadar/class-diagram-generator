@@ -2,8 +2,7 @@ export const initialNodes = [
   {
     id: "node-1",
     type: "classNode",
-    position: { x: 0, y: 0 },
-    data: { value: 123 },
+    position: { x: 10, y: 0 },
   },
 ];
 

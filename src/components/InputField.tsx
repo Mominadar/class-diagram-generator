@@ -1,12 +1,17 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
-import { Value } from "./types";
-// type Inputs = {
-//   example: string;
-//   exampleRequired: string;
-// };
+import { Value } from "../types";
+
+import * as z from "zod";
+
+const schema = z.object({
+  name: z.string().min(1, "Must be 1 or more characters long"),
+  dataType: z.string(),
+  keyType: z.enum(["PK", "FK", "Key", "None"]),
+});
 
 interface InputFieldProps {
   values?: Value;
@@ -23,7 +28,9 @@ function InputField({ values, addAttribute }: InputFieldProps) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: zodResolver(schema),
+  });
   const onSubmit = (data: any) => {
     console.log("ddddd", data);
     addAttribute(data);
@@ -50,7 +57,7 @@ function InputField({ values, addAttribute }: InputFieldProps) {
       />
       <select
         className="text-[7px] col-span-2"
-        {...register("key-type")}
+        {...register("keyType")}
         defaultValue={values ? values.keyType : "None"}
       >
         <option value="None">None</option>
@@ -81,6 +88,7 @@ function InputField({ values, addAttribute }: InputFieldProps) {
         )}
       </button>
       {errors.exampleRequired && <span>This field is required</span>}
+      {errors && errors.name && <p>upppp</p>}
     </form>
   );
 }
