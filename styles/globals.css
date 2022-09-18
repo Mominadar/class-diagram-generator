@@ -15,6 +15,17 @@
     gap: 0.5rem;
     padding: 0.5rem 0.25rem;
   }
+  .btn-linear {
+  }
+  .btn-rounded {
+    border-radius: 100px;
+    width: fit-content;
+    padding: 0.7rem;
+    z-index: 3;
+    margin-right: 10;
+    position: absolute;
+    right: -50px;
+  }
   .bg-gradient {
     background: rgb(3, 65, 97);
     background: linear-gradient(

@@ -12,6 +12,7 @@ import ReactFlow, {
   Controls,
   Edge,
   EdgeChange,
+  Node,
   NodeChange,
   NodeTypes,
   useReactFlow,
@@ -25,19 +26,15 @@ const nodeTypes: NodeTypes = { classNode: ClassNode };
 interface BoardProps {
   nodes: Node[];
   edges: Edge[];
-  setNodes: (nodes: Node[]) => void;
-  setEdges: (edges: Node[]) => void;
+  setNodes: (nodes: Node[] | ((nds: any) => Node<any>[])) => void;
+  setEdges: (edges: Edge[] | ((eds: any) => Edge<any>[])) => void;
 }
 
 function Board({ nodes, edges, setNodes, setEdges }: BoardProps) {
   const reactFlowInstance = useReactFlow();
-
   const onNodesChange = useCallback(
-    (changes: NodeChange[]) => {
-      setNodes((nds) => applyNodeChanges(changes, nds));
-      reactFlowInstance.fitView();
-    },
-
+    (changes: NodeChange[]) =>
+      setNodes((nds) => applyNodeChanges(changes, nds)),
     [setNodes]
   );
   const onEdgesChange = useCallback(
@@ -45,6 +42,7 @@ function Board({ nodes, edges, setNodes, setEdges }: BoardProps) {
       setEdges((eds) => applyEdgeChanges(changes, eds)),
     [setEdges]
   );
+
   const onConnect = useCallback(
     (connection: Connection) =>
       setEdges((eds: Edge<any>[]) =>

@@ -42,7 +42,7 @@ function ClassNode({ classElement }: ClassNodeProps) {
     <div className="h-full p-[10px] border-[1px] border-solid border-[#eee] border-radius-[500px] bg-white rounded-[5px]">
       <div className="flex justify-between  mb-[5px]">
         <input
-          className="text-[10px] text-slate-400 capitalize"
+          className="text-[10px] capitalize"
           id="text"
           name="text"
           placeholder="Class Name"

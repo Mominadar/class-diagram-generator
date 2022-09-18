@@ -5,38 +5,55 @@ import { VscSymbolClass } from "react-icons/vsc";
 import SideBarButton from "./SideBarButton";
 interface SideBarProps {
   handleAddClass: () => void;
-  handleAddAttribute: () => void;
+  handleAddAttribute: (data: any) => void;
   handleSave: () => void;
   handleDownload: () => void;
+  isCollapsed: boolean;
+  setIsCollapsed: (isCollapsed: boolean) => void;
 }
 export default function SideBar({
   handleAddClass,
   handleAddAttribute,
   handleSave,
   handleDownload,
+  isCollapsed,
+  setIsCollapsed,
 }: SideBarProps) {
   return (
     <div className="bg-gradient flex flex-col flex-grow-1 flex-auto justify-start gap-5 py-20 min-h-full relative">
-      <SideBarButton color="red" onClick={handleAddClass}>
-        <VscSymbolClass fontSize={22} />
-        Add Class
-      </SideBarButton>
-      <SideBarButton color="orange" onClick={handleAddAttribute}>
-        <AiOutlineNodeExpand fontSize={22} />
-        Add Attribute
-      </SideBarButton>
-      <SideBarButton color="yellow" onClick={handleSave}>
-        <MdOutlineSave fontSize={22} />
-        Save
-      </SideBarButton>
-      <SideBarButton color="blue" onClick={handleDownload}>
-        <MdSaveAlt fontSize={22} />
-        Download
-      </SideBarButton>
+      <SideBarButton
+        color="red"
+        onClick={handleAddClass}
+        icon={<VscSymbolClass fontSize={25} />}
+        text="Add Class"
+        isCollapsed={isCollapsed}
+      />
+      <SideBarButton
+        color="orange"
+        onClick={handleAddAttribute}
+        icon={<AiOutlineNodeExpand fontSize={25} />}
+        text="Add Attribute"
+        isCollapsed={isCollapsed}
+      />
+
+      <SideBarButton
+        color="yellow"
+        onClick={handleSave}
+        icon={<MdOutlineSave fontSize={25} />}
+        text="Save"
+        isCollapsed={isCollapsed}
+      />
+      <SideBarButton
+        color="blue"
+        onClick={handleDownload}
+        icon={<MdSaveAlt fontSize={25} />}
+        text="Download"
+        isCollapsed={isCollapsed}
+      />
 
       <button
         className={`btn bg-orange bordder-4 border-orange rounded-[50px] w-fit p-[5px] absolute right-[-50px] bottom-5 z-10`}
-        onClick={() => console.log("toggle")}
+        onClick={() => setIsCollapsed(!isCollapsed)}
       >
         <IoIosArrowBack fontSize={42} className="text-white" />
       </button>

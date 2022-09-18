@@ -1,32 +1,56 @@
+import { ReactElement } from "react";
+import parseClassNames from "../utils/parseClassNames";
+
 interface SideBarButtonProps {
   onClick: () => void;
   color: string;
+  icon: ReactElement;
+  text: string;
+  isCollapsed: boolean;
 }
 
-export const classNames = (...classes: string[]) => {
-  return classes.filter(Boolean).join(" ");
-};
-
 export default function SideBarButton({
-  children,
   color,
+  text,
+  icon,
+  isCollapsed,
   onClick,
-}: React.PropsWithChildren<SideBarButtonProps>) {
+}: SideBarButtonProps) {
   const getColor = () => {
     switch (color) {
       case "red":
-        return "bg-red border-red";
+        return "bg-red border-red top-[80px]";
       case "yellow":
-        return "bg-yellow border-yellow";
+        return "bg-yellow border-yellow top-[230px]";
       case "blue":
-        return "bg-blue border-blue";
+        return "bg-blue border-blue top-[300px]";
       default:
-        return "bg-orange border-orange";
+        return "bg-orange border-orange top-[150px]";
+    }
+  };
+  const checkCollapsed = (element: string) => {
+    switch (element) {
+      case "button":
+        return !isCollapsed ? "" : "btn-rounded";
+      case "text":
+        return !isCollapsed ? "" : "hidden";
+      default:
+        return "";
     }
   };
   return (
-    <button className={classNames("btn", getColor())} onClick={onClick}>
-      {children}
-    </button>
+    <>
+      <button
+        className={parseClassNames("btn", checkCollapsed("button"), getColor())}
+        onClick={onClick}
+      >
+        <div className="flex">
+          {icon}
+          <span className={parseClassNames(checkCollapsed("text"), "pl-[5px]")}>
+            {text}
+          </span>
+        </div>
+      </button>
+    </>
   );
 }
