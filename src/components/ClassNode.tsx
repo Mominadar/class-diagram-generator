@@ -10,7 +10,7 @@ interface ClassNodeProps {
   classElement?: ClassElement;
 }
 
-function ClassNode({ classElement }: ClassNodeProps) {
+function ClassNode({ classElement }: any) {
   const [attributes, setAttributes] = useState(classElement?.attributes ?? []);
   const [className, setClassName] = useState(classElement?.className ?? "");
   const onChange = useCallback((evt: any) => {
