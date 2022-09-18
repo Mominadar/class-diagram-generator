@@ -1,5 +1,5 @@
 import domtoimage from "dom-to-image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Edge, Node } from "react-flow-renderer";
 import Board from "../src/components/Board";
 import { initialEdges, initialNodes } from "../src/components/initialElements";
@@ -29,11 +29,11 @@ export default function IndexPage() {
 
   const handleAddAttribute = (data: any) => {
     console.log("data,", data);
-    console.log("attt", attributes);
-    const newAttr = { id: `${className}-attr-${attributes.length}`, ...data };
+    const newAttr = { id: `class-attr-`, ...data };
   };
 
   const handleSave = () => {};
+
   const handleDownload = () => {
     console.log("savinggg");
     const node = document.getElementById("board")!;
@@ -50,16 +50,6 @@ export default function IndexPage() {
   };
 
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const toggle = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-  useEffect(() => {
-    console.log("ffff", isCollapsed);
-  }, [isCollapsed]);
-
-  if (!hello.data) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-dark">
