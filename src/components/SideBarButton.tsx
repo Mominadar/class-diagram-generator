@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import parseClassNames from "../utils/parseClassNames";
 
 interface SideBarButtonProps {
-  onClick: () => void;
+  onClick: (data:any) => void;
   color: string;
   icon: ReactElement;
   text: string;

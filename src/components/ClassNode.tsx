@@ -1,10 +1,8 @@
 import { useCallback, useState } from "react";
 import { Handle, Position } from "react-flow-renderer";
 import { BiPlus } from "react-icons/bi";
-import { ClassElement } from "../types";
+import { ClassElement, Value } from "../types";
 import InputField from "./InputField";
-
-const handleStyle = { left: 10 };
 
 interface ClassNodeProps {
   classElement?: ClassElement;
@@ -69,7 +67,7 @@ function ClassNode({ classElement }: any) {
         <label className="text-[6px] text-slate-400 col-span-1">actions</label>
       </div>
       <div className="flex flex-col h-full">
-        {attributes.map((attribute) => {
+        {attributes.map((attribute: Value) => {
           return (
             <InputField
               key={attribute.id}
