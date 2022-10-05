@@ -14,12 +14,14 @@ import ReactFlow, {
   EdgeChange,
   Node,
   NodeChange,
+  NodeTypes,
   useReactFlow,
 } from "react-flow-renderer";
 import { GiHorizontalFlip, GiVerticalFlip } from "react-icons/gi";
 import getLayoutedElements from "../utils/setLayout";
 import ClassNode from "./ClassNode";
-const nodeTypes = { classNode: ClassNode };
+
+const nodeTypes: NodeTypes = { classNode: ClassNode };
 
 interface BoardProps {
   nodes: Node[];
@@ -76,9 +78,7 @@ function Board({ nodes, edges, setNodes, setEdges }: BoardProps) {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      nodeTypes={{
-        classNode: ClassNode,
-      }}
+      nodeTypes={nodeTypes}
       fitView
       connectionMode={ConnectionMode.Loose}
     >
